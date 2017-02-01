@@ -39,9 +39,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Actor.cs" />
+    <Compile Include="AmmoBox.cs" />
+    <Compile Include="Bullet.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="HealthPack.cs" />
     <Compile Include="KeyboardUtility.cs" />
+    <Compile Include="Pickup.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

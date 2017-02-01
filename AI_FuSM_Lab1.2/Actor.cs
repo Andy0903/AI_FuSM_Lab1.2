@@ -9,7 +9,17 @@ namespace AI_FuSM_Lab1._2
 {
     abstract class Actor : Entity
     {
+        public enum Direction
+        {
+            Up,
+            Left,
+            Down,
+            Right
+        }
+
         protected float mySpeed = 0.1f;
+        protected Direction myDir = Direction.Right;
+        protected List<Bullet> myBullets = new List<Bullet>();
 
         protected bool InsideWindow(Vector2 aPos)
         {
