@@ -27,19 +27,14 @@ namespace AI_FuSM_Lab1._2
 
         public override void Update(GameTime aGameTime)
         {
-            Shoot();
+            if (InputManager.ActionClick)
+            {
+                Shoot();
+            }
             Movement(aGameTime);
             foreach (Bullet b in myBullets)
             {
                 b.Update(aGameTime);
-            }
-        }
-
-        private void Shoot()
-        {
-            if (InputManager.ActionClick)
-            {
-                myBullets.Add(new Bullet(Position, myDir, Color));
             }
         }
 

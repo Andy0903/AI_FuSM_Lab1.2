@@ -16,6 +16,7 @@ namespace AI_FuSM_Lab1._2
         Random myRand = new Random();
 
         Player myPlayer;
+        Enemy myEnemy;
         List<Pickup> myPickups = new List<Pickup>();
 
         Thread mySpawnThread;
@@ -37,6 +38,7 @@ namespace AI_FuSM_Lab1._2
             myContentManager = Content;
             mySpritebatch = new SpriteBatch(GraphicsDevice);
             myPlayer = new Player(new Vector2(100, 100));
+            myEnemy = new Enemy(new Vector2(400, 100));
 
             myThreadIsActive = true;
             mySpawnThread = new Thread(new ThreadStart(SpawnPickups));
@@ -81,6 +83,7 @@ namespace AI_FuSM_Lab1._2
             mySpritebatch.Begin();
 
             myPlayer.Draw(mySpritebatch);
+            myEnemy.Draw(mySpritebatch);
 
             foreach (Pickup p in myPickups)
             {

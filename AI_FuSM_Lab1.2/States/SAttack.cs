@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace AI_FuSM_Lab1._2
 {
-    class Enemy
+    class SAttack : State
     {
+        public override void Execute(float aActivationValue)
+        {
+            ActivationValue = aActivationValue;
+        }
     }
 }
