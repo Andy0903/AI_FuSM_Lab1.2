@@ -9,8 +9,9 @@ namespace AI_FuSM_Lab1._2
 
         public override float CalculateUrgency(Enemy aMe)
         {
-            const float WEIGHT = 0.05f;
-            float urgency = 1f - Vector2.Distance(aMe.Position, aMe.myTarget.Position) / (aMe.Health * aMe.Ammo * WEIGHT);
+            float missingHP = aMe.MaxHealth - aMe.Health;
+
+            float urgency = 1f - Vector2.Distance(aMe.Position, aMe.myTarget.Position) / (missingHP * aMe.Ammo);
 
             urgency = MathHelper.Clamp(urgency, 0, 1);
 
@@ -22,6 +23,7 @@ namespace AI_FuSM_Lab1._2
             if (0 < aMe.Ammo && TimeToShoot(aGameTime))
             {
                 aMe.Shoot();
+                aMe.Ammo--;
                 myLastShotTime = (float)aGameTime.TotalGameTime.TotalSeconds;
             }
         }

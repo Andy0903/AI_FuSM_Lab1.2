@@ -17,10 +17,10 @@ namespace AI_FuSM_Lab1._2
 
         Player myPlayer;
         Enemy myEnemy;
-        List<Pickup> myPickups = new List<Pickup>();
+        //List<Pickup> myPickups = new List<Pickup>();
 
-        Thread mySpawnThread;
-        bool myThreadIsActive;
+        //Thread mySpawnThread;
+        //bool myThreadIsActive;
 
         public Game1()
         {
@@ -41,21 +41,21 @@ namespace AI_FuSM_Lab1._2
             myEnemy = new Enemy(new Vector2(400, 100), myPlayer);
             myPlayer.SetTarget(myEnemy);
 
-            myThreadIsActive = true;
-            mySpawnThread = new Thread(new ThreadStart(SpawnPickups));
-            mySpawnThread.Start();
+            //myThreadIsActive = true;
+            //mySpawnThread = new Thread(new ThreadStart(SpawnPickups));
+            //mySpawnThread.Start();
         }
 
         protected override void UnloadContent()
         {
-            myThreadIsActive = false;
+          //  myThreadIsActive = false;
         }
         
         protected override void Update(GameTime aGameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                myThreadIsActive = false;
+              //  myThreadIsActive = false;
                 Exit();
             }
 
@@ -65,20 +65,20 @@ namespace AI_FuSM_Lab1._2
             base.Update(aGameTime);
         }
 
-        private void SpawnPickups()
-        {
-            while (myThreadIsActive)
-            {
-                Vector2 hpPackPos = new Vector2(myRand.Next(10, myGraphics.PreferredBackBufferWidth - 50), myRand.Next(10, myGraphics.PreferredBackBufferWidth - 50));
-                Vector2 ammoPackPos = new Vector2(myRand.Next(10, myGraphics.PreferredBackBufferWidth - 50), myRand.Next(10, myGraphics.PreferredBackBufferWidth - 50));
+        //private void SpawnPickups()
+        //{
+        //    while (myThreadIsActive)
+        //    {
+        //        Vector2 hpPackPos = new Vector2(myRand.Next(10, myGraphics.PreferredBackBufferWidth - 50), myRand.Next(10, myGraphics.PreferredBackBufferWidth - 50));
+        //        Vector2 ammoPackPos = new Vector2(myRand.Next(10, myGraphics.PreferredBackBufferWidth - 50), myRand.Next(10, myGraphics.PreferredBackBufferWidth - 50));
 
 
-                myPickups.Add(new HealthPack(hpPackPos));
-                Thread.Sleep(1000);
-                myPickups.Add(new AmmoBox(ammoPackPos));
-                Thread.Sleep(1000);
-            }
-        }
+        //        myPickups.Add(new HealthPack(hpPackPos));
+        //        Thread.Sleep(1000);
+        //        myPickups.Add(new AmmoBox(ammoPackPos));
+        //        Thread.Sleep(1000);
+        //    }
+        //}
         
         protected override void Draw(GameTime aGameTime)
         {
@@ -88,10 +88,10 @@ namespace AI_FuSM_Lab1._2
             myPlayer.Draw(mySpritebatch);
             myEnemy.Draw(mySpritebatch);
 
-            foreach (Pickup p in myPickups)
-            {
-                p.Draw(mySpritebatch);
-            }
+            //foreach (Pickup p in myPickups)
+            //{
+            //    p.Draw(mySpritebatch);
+            //}
 
             mySpritebatch.End();
             base.Draw(aGameTime);
