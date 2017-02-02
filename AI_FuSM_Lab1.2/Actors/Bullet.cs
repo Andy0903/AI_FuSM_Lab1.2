@@ -7,31 +7,45 @@ using Microsoft.Xna.Framework;
 
 namespace AI_FuSM_Lab1._2
 {
-    class Bullet : Actor
+    class Bullet : Entity
     {
-        public Bullet(Vector2 aPosition, Direction aDir, Color aColor) : base("Bullet", aPosition)
+        Actor myTarget;
+        float mySpeed;
+
+        public bool HasCollided { get; private set; }
+
+        public Bullet(Vector2 aPosition, Color aColor, Actor aTarget) : base("Bullet", aPosition)
         {
-            myDir = aDir;
             Color = aColor;
             mySpeed = 0.2f;
+            myTarget = aTarget;
         }
 
         public void Update(GameTime aGameTime)
         {
-            switch (myDir)
+            Collision();
+            Vector2 direction = GetDirection();
+
+            float newPositionX = Position.X + (mySpeed * direction.X * aGameTime.ElapsedGameTime.Milliseconds);
+            float newPositionY = Position.Y + (mySpeed * direction.Y * aGameTime.ElapsedGameTime.Milliseconds);
+            Position = new Vector2(newPositionX, newPositionY);
+            
+        }
+
+        private Vector2 GetDirection()
+        {
+            Vector2 direction = (myTarget.Position - Position);
+            direction.Normalize();
+
+            return direction;
+        }
+
+         private void Collision()
+        {
+            if (Hitbox.Intersects(myTarget.Hitbox))
             {
-                case Direction.Up:
-                    Position = new Vector2(Position.X, Position.Y - mySpeed * aGameTime.ElapsedGameTime.Milliseconds);
-                    break;
-                case Direction.Left:
-                    Position = new Vector2(Position.X - mySpeed * aGameTime.ElapsedGameTime.Milliseconds, Position.Y);
-                    break;
-                case Direction.Down:
-                    Position = new Vector2(Position.X, Position.Y + mySpeed * aGameTime.ElapsedGameTime.Milliseconds);
-                    break;
-                case Direction.Right:
-                    Position = new Vector2(Position.X + mySpeed * aGameTime.ElapsedGameTime.Milliseconds, Position.Y);
-                    break;
+                myTarget.TakeDamage(10);
+                HasCollided = true;
             }
         }
     }

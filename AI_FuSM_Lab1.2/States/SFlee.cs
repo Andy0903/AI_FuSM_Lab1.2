@@ -7,8 +7,12 @@ namespace AI_FuSM_Lab1._2
     {
         public override float CalculateUrgency(Enemy aMe)
         {
-            float safeSpace = 200f;
-            float urgency = 1f -Vector2.Distance(aMe.Position, aMe.myPlayer.Position) / safeSpace;
+            // float safeSpace = 200f;
+
+            float missingHealth = aMe.MaxHealth - aMe.Health;
+            const float WEIGHT = 2;
+
+            float urgency = 1f - Vector2.Distance(aMe.Position, aMe.myTarget.Position) / (missingHealth * WEIGHT);
 
             urgency = MathHelper.Clamp(urgency, 0, 1);
 
@@ -19,10 +23,9 @@ namespace AI_FuSM_Lab1._2
         {
             Vector2 wantToMove = Vector2.Zero;
 
-            Vector2 direction = Vector2.Normalize(aMe.Position - aMe.myPlayer.Position);
+            Vector2 direction = Vector2.Normalize(aMe.Position - aMe.myTarget.Position);
             wantToMove = direction * aMe.mySpeed;
-
-
+            
             if (aMe.InsideWindow(aMe.Position += wantToMove))
             {
                 aMe.Position += wantToMove;

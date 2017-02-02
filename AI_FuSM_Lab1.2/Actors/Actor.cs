@@ -9,16 +9,10 @@ namespace AI_FuSM_Lab1._2
 {
     abstract class Actor : Entity
     {
-        public enum Direction
-        {
-            Up,
-            Left,
-            Down,
-            Right
-        }
-        public Direction myDir = Direction.Right;
-
+        protected List<Bullet> myBullets = new List<Bullet>();
         public float mySpeed = 0.1f;
+        public Actor myTarget;
+
         public bool InsideWindow(Vector2 aPos)
         {
                 return 0 < aPos.Y && aPos.Y < Game1.myGraphics.PreferredBackBufferHeight
@@ -29,6 +23,29 @@ namespace AI_FuSM_Lab1._2
         {
         }
 
+        public virtual void TakeDamage(int aDmg)
+        {   
+        }
+
+        public void Shoot()
+        {
+            myBullets.Add(new Bullet(Position, Color, myTarget));
+        }
+
+        public virtual void Update(GameTime aGameTime)
+        {
+            for (int i = myBullets.Count - 1; i >= 0; i--)
+            {
+                if (myBullets[i].HasCollided == true)
+                {
+                    myBullets.RemoveAt(i);
+                }
+                else
+                {
+                    myBullets[i].Update(aGameTime);
+                }
+            }
+        }
 
     }
 }

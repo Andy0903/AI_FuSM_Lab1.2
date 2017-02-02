@@ -10,11 +10,15 @@ namespace AI_FuSM_Lab1._2
 {
     class Player : Actor
     {
-        protected List<Bullet> myBullets = new List<Bullet>();
 
         public Player(Vector2 aPosition) : base("Box", aPosition)
         {
             Color = Color.Red;
+        }
+
+        public void SetTarget(Actor aTarget)
+        {
+            myTarget = aTarget;
         }
 
         public override void Draw(SpriteBatch aSpriteBatch)
@@ -27,54 +31,41 @@ namespace AI_FuSM_Lab1._2
             base.Draw(aSpriteBatch);
         }
 
-        public void Update(GameTime aGameTime)
+        public override void Update(GameTime aGameTime)
         {
             if (InputManager.ActionClick)
             {
                 Shoot();
             }
             Movement(aGameTime);
-            foreach (Bullet b in myBullets)
-            {
-                b.Update(aGameTime);
-            }
+
+            base.Update(aGameTime);
         }
 
         private void Movement(GameTime aGameTime)
         {
             Vector2 newPosition = Vector2.Zero;
-            Direction newDir = Direction.Right;
             if (InputManager.Up)
             {
                 newPosition = new Vector2(Position.X, Position.Y - mySpeed * aGameTime.ElapsedGameTime.Milliseconds);
-                newDir = Direction.Up;
             }
             if (InputManager.Left)
             {
                 newPosition = new Vector2(Position.X - mySpeed * aGameTime.ElapsedGameTime.Milliseconds, Position.Y);
-                newDir = Direction.Left;
             }
             if (InputManager.Down)
             {
                 newPosition = new Vector2(Position.X, Position.Y + mySpeed * aGameTime.ElapsedGameTime.Milliseconds);
-                newDir = Direction.Down;
             }
             if (InputManager.Right)
             {
                 newPosition = new Vector2(Position.X + mySpeed * aGameTime.ElapsedGameTime.Milliseconds, Position.Y);
-                newDir = Direction.Right;
             }
 
             if (InsideWindow(newPosition))
             {
                 Position = newPosition;
-                myDir = newDir;
             }
-        }
-
-        private void Shoot()
-        {
-            myBullets.Add(new Bullet(Position, myDir, Color));
         }
     }
 }

@@ -39,6 +39,7 @@ namespace AI_FuSM_Lab1._2
             mySpritebatch = new SpriteBatch(GraphicsDevice);
             myPlayer = new Player(new Vector2(100, 100));
             myEnemy = new Enemy(new Vector2(400, 100), myPlayer);
+            myPlayer.SetTarget(myEnemy);
 
             myThreadIsActive = true;
             mySpawnThread = new Thread(new ThreadStart(SpawnPickups));
@@ -47,6 +48,7 @@ namespace AI_FuSM_Lab1._2
 
         protected override void UnloadContent()
         {
+            myThreadIsActive = false;
         }
         
         protected override void Update(GameTime aGameTime)
