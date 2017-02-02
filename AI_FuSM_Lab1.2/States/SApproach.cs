@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace AI_FuSM_Lab1._2
 {
     class SApproach : State
     {
-        public override void Execute(float aActivationValue)
+        public override float CalculateUrgency(Enemy aMe)
         {
-            ActivationValue = aActivationValue;
+            return 0;
+            //throw new NotImplementedException();
+        }
+
+        public override void Execute(Enemy aMe, float aUrgency, GameTime aGameTime)
+        {
+           // throw new NotImplementedException();
         }
     }
 }

@@ -7,7 +7,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DF878DFC-6E9E-4104-838B-91F4C36C22FA}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AI_FuSM_Lab1._2</RootNamespace>
     <AssemblyName>AI_FuSM_Lab1.2</AssemblyName>
@@ -44,14 +44,14 @@
     <Compile Include="Actors\Actor.cs" />
     <Compile Include="States\SApproach.cs" />
     <Compile Include="States\SAttack.cs" />
-    <Compile Include="States\SEvade.cs" />
+    <Compile Include="States\SFlee.cs" />
     <Compile Include="Pickups\AmmoBox.cs" />
     <Compile Include="Actors\Bullet.cs" />
     <Compile Include="Actors\Enemy.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Pickups\HealthPack.cs" />
-    <Compile Include="States\IState.cs" />
+    <Compile Include="States\State.cs" />
     <Compile Include="Input\KeyboardUtility.cs" />
     <Compile Include="Pickups\Pickup.cs" />
     <Compile Include="Actors\Player.cs" />

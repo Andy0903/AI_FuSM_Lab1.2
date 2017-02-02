@@ -16,7 +16,7 @@ namespace AI_FuSM_Lab1._2
             mySpeed = 0.2f;
         }
 
-        public override void Update(GameTime aGameTime)
+        public void Update(GameTime aGameTime)
         {
             switch (myDir)
             {

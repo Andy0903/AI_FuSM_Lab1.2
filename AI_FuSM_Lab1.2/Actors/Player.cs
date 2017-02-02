@@ -10,6 +10,8 @@ namespace AI_FuSM_Lab1._2
 {
     class Player : Actor
     {
+        protected List<Bullet> myBullets = new List<Bullet>();
+
         public Player(Vector2 aPosition) : base("Box", aPosition)
         {
             Color = Color.Red;
@@ -25,7 +27,7 @@ namespace AI_FuSM_Lab1._2
             base.Draw(aSpriteBatch);
         }
 
-        public override void Update(GameTime aGameTime)
+        public void Update(GameTime aGameTime)
         {
             if (InputManager.ActionClick)
             {
@@ -68,6 +70,11 @@ namespace AI_FuSM_Lab1._2
                 Position = newPosition;
                 myDir = newDir;
             }
+        }
+
+        private void Shoot()
+        {
+            myBullets.Add(new Bullet(Position, myDir, Color));
         }
     }
 }

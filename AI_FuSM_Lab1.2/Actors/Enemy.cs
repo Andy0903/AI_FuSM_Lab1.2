@@ -10,7 +10,7 @@ namespace AI_FuSM_Lab1._2
 {
     class Enemy : Actor
     {
-        State myState;
+        List<State> myPossibleStates = new List<State> { new SFlee(), new SApproach(), new SAttack() };
         SpriteFont myFont;
 
         int myHealth;
@@ -19,26 +19,28 @@ namespace AI_FuSM_Lab1._2
         int myAmmo;
         int myMaxAmmo;
 
+        public Player myPlayer;
 
-        public Enemy(Vector2 aPosition) : base("Box", aPosition)
+
+        public Enemy(Vector2 aPosition, Player aPlayer) : base("Box", aPosition)
         {
             myHealth = myMaxHealth = 100;
             myAmmo = myMaxAmmo = 25;
-
+            myPlayer = aPlayer;
             Color = Color.Blue;
             myFont = Game1.myContentManager.Load<SpriteFont>("Font");
         }
 
-        public override void Update(GameTime aGameTime)
+        public void Update(GameTime aGameTime)
         {
-            myState = DetermineState();
-
-            myState.Execute();
-        }
-
-        private State DetermineState()
-        {
-            return new SAttack();
+            foreach (State s in myPossibleStates)
+            {
+                float urgency = s.CalculateUrgency(this);
+                if (urgency > 0)
+                {
+                    s.Execute(this, urgency, aGameTime);
+                }
+            }
         }
 
         public override void Draw(SpriteBatch aSpriteBatch)

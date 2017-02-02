@@ -38,7 +38,7 @@ namespace AI_FuSM_Lab1._2
             myContentManager = Content;
             mySpritebatch = new SpriteBatch(GraphicsDevice);
             myPlayer = new Player(new Vector2(100, 100));
-            myEnemy = new Enemy(new Vector2(400, 100));
+            myEnemy = new Enemy(new Vector2(400, 100), myPlayer);
 
             myThreadIsActive = true;
             mySpawnThread = new Thread(new ThreadStart(SpawnPickups));
@@ -59,6 +59,7 @@ namespace AI_FuSM_Lab1._2
 
             KeyboardUtility.Update();
             myPlayer.Update(aGameTime);
+            myEnemy.Update(aGameTime);
             base.Update(aGameTime);
         }
 
